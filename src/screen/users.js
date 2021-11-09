@@ -85,10 +85,12 @@ const Users = (props) => {
                                 <th>Id</th>
                                 <th>Name</th>
                                 <th>salary</th>
+                                <th>permission level</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        {console.log(response)}
+                        {console.log("🚀 ~ file: users.js ~ line 105 ~ response.map ~ PERMISSION_LEVEL", typeof (PERMISSION_LEVEL))
+                        }
                         <tbody>
                             {response &&
                                 response &&
@@ -100,9 +102,10 @@ const Users = (props) => {
                                             <td>{user.id}</td>
                                             <td>{user.employee_name}</td>
                                             <td>{user.employee_salary}</td>
+                                            <td>{user.permission_level}</td>
                                             <td>
-                                                <button className=""  type="button" onClick={() => { handleShow(); setName(user.employee_name); setSalary(user.employee_salary); handleUpdate(); setId(user.id) }} title="Edit" data-toggle="tooltip"><i className="material-icons mr-3" ></i></button>
-                                                <a className="delete" title="Delete" data-toggle="tooltip " onClick={() => handleDelete(user.id)}><i className="material-icons"></i></a>
+                                                {user.permission_level >= PERMISSION_LEVEL ? <button className="" type="button" onClick={() => { handleShow(); setName(user.employee_name); setSalary(user.employee_salary); handleUpdate(); setId(user.id) }} title="Edit" data-toggle="tooltip"><i className="material-icons mr-3" ></i></button> : <button className="" style={{ "cursor": "not-allowed" }} disabled type="button" onClick={() => { handleShow(); setName(user.employee_name); setSalary(user.employee_salary); handleUpdate(); setId(user.id) }} title="Edit" data-toggle="tooltip"><i className="material-icons mr-3" ></i></button>}
+                                                {user.permission_level >= PERMISSION_LEVEL ? <button className="delete" title="Delete" data-toggle="tooltip " onClick={() => handleDelete(user.id)}><i className="material-icons"></i></button> : <button className="delete" style={{ "cursor": "not-allowed" }} disabled title="Delete" data-toggle="tooltip " onClick={() => handleDelete(user.id)}><i className="material-icons"></i></button>}
                                             </td>
                                         </tr>
                                     )
