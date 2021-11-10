@@ -6,25 +6,14 @@
       "id": 5
     },
     {
-      "id": 6,
-      "employee_name": "Brielle Williamson",
-      "employee_salary": 372000,
-      "employee_age": 61,
-      "permission_level": 300
-    },
-    {
-      "id": 7,
+      "employee_salary": "1375003333",
       "employee_name": "Herrod Chandler",
-      "employee_salary": 137500,
-      "employee_age": 59,
-      "permission_level": 400
+      "id": 7
     },
     {
-      "id": 8,
-      "employee_name": "Rhona Davidson",
       "employee_salary": 327900,
-      "employee_age": 55,
-      "permission_level": 600
+      "employee_name": "Rhona 1Davidson",
+      "id": 8
     },
     {
       "id": 10,
@@ -34,11 +23,10 @@
       "permission_level": 100
     },
     {
-      "id": 11,
-      "employee_name": "Jena Gaines",
       "employee_salary": 90560,
-      "employee_age": 30,
-      "permission_level": 800
+      "employee_name": "Jena1 Gaines",
+      "permission_level": 400,
+      "id": 11
     },
     {
       "id": 12,
@@ -48,18 +36,9 @@
       "permission_level": 900
     },
     {
-      "id": 13,
-      "employee_name": "Charde Marshall",
       "employee_salary": 470600,
-      "employee_age": 36,
-      "permission_level": 1000
-    },
-    {
-      "id": 14,
-      "employee_name": "Haley Kennedy",
-      "employee_salary": 313500,
-      "employee_age": 43,
-      "permission_level": 1200
+      "employee_name": "Charde1 Marshall1",
+      "id": 13
     },
     {
       "id": 15,
@@ -76,13 +55,6 @@
       "permission_level": 900
     },
     {
-      "id": 17,
-      "employee_name": "Paul Byrd",
-      "employee_salary": 725000,
-      "employee_age": 64,
-      "permission_level": 600
-    },
-    {
       "id": 18,
       "employee_name": "Gloria Little",
       "employee_salary": 237500,
@@ -90,18 +62,9 @@
       "permission_level": 300
     },
     {
-      "id": 19,
-      "employee_name": "Bradley Greer",
-      "employee_salary": 132000,
-      "employee_age": 41,
-      "permission_level": 200
-    },
-    {
-      "id": 20,
-      "employee_name": "Dai Rios",
       "employee_salary": 217500,
-      "employee_age": 35,
-      "permission_level": 400
+      "employee_name": "Dai Rios new",
+      "id": 20
     },
     {
       "id": 21,
@@ -116,6 +79,64 @@
       "employee_salary": 675000,
       "employee_age": 40,
       "permission_level": 200
+    },
+    {
+      "employee_salary": "2000",
+      "employee_name": "mark ",
+      "id": 23
+    },
+    {
+      "employee_salary": 313500,
+      "employee_name": "Haley1 Kennedy",
+      "id": 24
+    },
+    {
+      "employee_salary": 313500,
+      "employee_name": "Haley1 Kennedy",
+      "id": 25
+    },
+    {
+      "employee_salary": "test",
+      "employee_name": "test",
+      "id": 26
+    },
+    {
+      "id": 17,
+      "employee_name": "Paul Byrd",
+      "employee_salary": 725000,
+      "employee_age": 64,
+      "permission_level": 600
+    },
+    {
+      "id": 18,
+      "employee_name": "Gloria Little",
+      "employee_salary": 237500,
+      "employee_age": 59,
+      "permission_level": 300
+    },
+    {
+      "employee_salary": 217500,
+      "employee_name": "Dai Rios new",
+      "id": 20
+    },
+    {
+      "id": 17,
+      "employee_name": "Paul Byrd",
+      "employee_salary": 725000,
+      "employee_age": 64,
+      "permission_level": 600
+    },
+    {
+      "id": 18,
+      "employee_name": "Gloria Little",
+      "employee_salary": 237500,
+      "employee_age": 59,
+      "permission_level": 300
+    },
+    {
+      "employee_salary": 217500,
+      "employee_name": "Dai Rios new",
+      "id": 20
     }
   ]
 }

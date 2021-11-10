@@ -1,6 +1,4 @@
-import logo from './logo.svg';
 import './App.css';
-
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Users from './screen/users'
 import AddUser from './screen/addUser'
@@ -16,6 +14,7 @@ function App() {
           <Route path="/" component={Users} />
 
         </Switch>
+
       </div>
     </Router>
   );

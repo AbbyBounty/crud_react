@@ -101,7 +101,8 @@ export const updateUser = (id, salary, name) => {
 
         const body = {
             employee_salary: salary,
-            employee_name: name
+            employee_name: name,
+            permission_level:400
         }
 
 

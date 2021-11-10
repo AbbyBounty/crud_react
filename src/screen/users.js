@@ -3,38 +3,56 @@ import { useEffect, useState, Fragment } from 'react'
 import { getUsers, addUser, deleteUser, updateUser } from '../actions/userAction'
 import { Dialog, Transition } from '@headlessui/react'
 import { Button } from 'react-bootstrap';
+import Pagination from './Pagination'
+import axios from 'axios';
 import {
     PERMISSION_LEVEL
 } from '../constant/userConstant'
-const Users = (props) => {
+const Users = () => {
 
 
-    const users = useSelector((store) => store.users)
-    const { error, response, loading } = users
     const [salary, setSalary] = useState('')
     const [id, setId] = useState(0)
     const [name, setName] = useState('')
     const [show, setShow] = useState(false);
     const [update, setUpdate] = useState(false);
 
+    const [userList, setUserList] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+
+    //number of users to display on single page 
+    const [usersPerPage] = useState(5);
+
+
     const handleClose = () => { setShow(false); setUpdate(false) };
 
     const handleShow = () => setShow(true);
     const dispatch = useDispatch()
 
+   
+
+
     useEffect(() => {
-        dispatch(getUsers())
 
-        if (response && response.status == 'success') {
-            dispatch(getUsers())
-        } else if (error) {
-            alert('error')
-        }
-    }, [])
+        const fetchUsers = async () => {
+            const res = await axios.get('http://localhost:8000/users');
+            setUserList(res.data);
+        };
 
-    useEffect(() => { }, [loading, response, error])
+        fetchUsers();
+
+   
+ 
+    }, [userList])
 
 
+    // Get current posts
+    const indexOfLastUser = currentPage * usersPerPage;
+    const indexOfFirstUser = indexOfLastUser - usersPerPage;
+    const currentUsers = userList.slice(indexOfFirstUser, indexOfLastUser);
+
+    // Change page
+    const paginate = pageNumber => setCurrentPage(pageNumber);
 
     const onAdd = () => {
         dispatch(addUser(name, salary))
@@ -44,19 +62,13 @@ const Users = (props) => {
 
     }
 
-    const onCancel = () => {
-        props.history.push('/')
-    }
-
+  
 
     const handleDelete = (id) => {
         dispatch(deleteUser(id))
 
         dispatch(getUsers())
-
-
     }
-
 
     const handleUpdate = () => {
         setUpdate(true)
@@ -67,6 +79,11 @@ const Users = (props) => {
         dispatch(getUsers())
 
     }
+
+
+
+
+
     return (
         < div >
             <div className="container">
@@ -89,17 +106,14 @@ const Users = (props) => {
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        {console.log("🚀 ~ file: users.js ~ line 105 ~ response.map ~ PERMISSION_LEVEL", typeof (PERMISSION_LEVEL))
-                        }
+
                         <tbody>
-                            {response &&
-                                response &&
-                                response.length > 0 &&
-                                response.map((user) => {
+                            {
+                                currentUsers.map((user,i) => {
                                     return (
 
-                                        <tr>
-                                            <td>{user.id}</td>
+                                        <tr key={i}>
+                                            <td>{user.id} </td>
                                             <td>{user.employee_name}</td>
                                             <td>{user.employee_salary}</td>
                                             <td>{user.permission_level}</td>
@@ -113,7 +127,16 @@ const Users = (props) => {
                         </tbody>
                     </table>
                 </div>
-            </div><Transition.Root show={show} as={Fragment}>
+
+
+            </div>
+
+            <Pagination
+                usersPerPage={usersPerPage}
+                totalUsers={userList.length}
+                paginate={paginate}
+            />
+            <Transition.Root show={show} as={Fragment}>
                 <Dialog as="div" className="fixed inset-0 overflow-hidden" onClose={handleClose}>
                     <div className="absolute inset-0 overflow-hidden">
                         <Transition.Child
@@ -178,6 +201,8 @@ const Users = (props) => {
 
 
                                     </div>
+
+
                                 </div>
                             </Transition.Child>
                         </div>
