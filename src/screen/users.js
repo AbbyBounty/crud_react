@@ -23,6 +23,7 @@ const Users = () => {
     //number of users to display on single page 
     const [usersPerPage] = useState(5);
 
+    const [order,setOrder]=useState("ASC")
 
     const handleClose = () => { setShow(false); setUpdate(false) };
 
@@ -43,7 +44,7 @@ const Users = () => {
 
    
  
-    }, [userList])
+    }, [])
 
 
     // Get current posts
@@ -77,11 +78,30 @@ const Users = () => {
     const onUpdate = (id, salary, name) => {
         dispatch(updateUser(id, salary, name))
         dispatch(getUsers())
+      
+
 
     }
 
 
+    const sorting =(col)=>{
+        if(order==="ASC"){
+            const sorted = [...userList].sort((a,b)=>
+                a[col].toLowerCase() > b[col].toLowerCase() ? 1: -1
+            );
+            console.log("🚀 ~ file: users.js ~ line 90 ~ sorting ~ sorted", sorted)
+            setUserList(sorted);
+            setOrder("DSC");
+        }
 
+        if(order==="DSC"){
+            const sorted = [...userList].sort((a,b)=>
+                a[col].toLowerCase() < b[col].toLowerCase() ? 1: -1
+            );
+            setUserList(sorted);
+            setOrder("ASC");
+        }
+    }
 
 
     return (
@@ -99,10 +119,10 @@ const Users = () => {
                     <table className="table table-bordered">
                         <thead>
                             <tr>
-                                <th>Id</th>
-                                <th>Name</th>
-                                <th>salary</th>
-                                <th>permission level</th>
+                                <th onClick={()=>sorting("id")}>Id</th>
+                                <th onClick={()=>sorting("employee_name")}>Name</th>
+                                <th onClick={()=>sorting("employee_salary")}>salary</th>
+                                <th onClick={()=>sorting("permission_level")}>permission level</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
