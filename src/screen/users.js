@@ -23,14 +23,15 @@ const Users = () => {
     //number of users to display on single page 
     const [usersPerPage] = useState(5);
 
-    const [order,setOrder]=useState("ASC")
+    const [order, setOrder] = useState("ASC")
 
     const handleClose = () => { setShow(false); setUpdate(false) };
 
     const handleShow = () => setShow(true);
     const dispatch = useDispatch()
+    const [searchField, setSearchField] = useState("");
 
-   
+
 
 
     useEffect(() => {
@@ -42,10 +43,21 @@ const Users = () => {
 
         fetchUsers();
 
-   
- 
+
+
     }, [])
 
+
+    const filteredcategory = userList.filter(
+        user => {
+            return (
+                user
+                    .employee_name
+                    .toLowerCase()
+                    .includes(searchField.toLowerCase())
+            );
+        }
+    );
 
     // Get current posts
     const indexOfLastUser = currentPage * usersPerPage;
@@ -63,7 +75,7 @@ const Users = () => {
 
     }
 
-  
+
 
     const handleDelete = (id) => {
         dispatch(deleteUser(id))
@@ -78,31 +90,36 @@ const Users = () => {
     const onUpdate = (id, salary, name) => {
         dispatch(updateUser(id, salary, name))
         dispatch(getUsers())
-      
+
 
 
     }
 
 
-    const sorting =(col)=>{
-        if(order==="ASC"){
-            const sorted = [...userList].sort((a,b)=>
-                a[col].toLowerCase() > b[col].toLowerCase() ? 1: -1
+    const sorting = (col) => {
+        if (order === "ASC") {
+            const sorted = [...userList].sort((a, b) =>
+                a[col].toLowerCase() > b[col].toLowerCase() ? 1 : -1
             );
             console.log("🚀 ~ file: users.js ~ line 90 ~ sorting ~ sorted", sorted)
             setUserList(sorted);
             setOrder("DSC");
         }
 
-        if(order==="DSC"){
-            const sorted = [...userList].sort((a,b)=>
-                a[col].toLowerCase() < b[col].toLowerCase() ? 1: -1
+        if (order === "DSC") {
+            const sorted = [...userList].sort((a, b) =>
+                a[col].toLowerCase() < b[col].toLowerCase() ? 1 : -1
             );
             setUserList(sorted);
             setOrder("ASC");
         }
     }
 
+    const handleChange = e => {
+        setSearchField(e.target.value);
+
+    };
+ 
 
     return (
         < div >
@@ -116,20 +133,26 @@ const Users = () => {
                             </div>
                         </div>
                     </div>
+                    <div className="pt-2 relative mx-auto text-gray-600 mb-6 flex justify-end">
+                        <input className="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+                            type="search" name="search" placeholder="Search" onChange={handleChange} />
+                        <button type="submit" className="absolute right-0 top-0 mt-5 mr-4">
+                        </button>
+                    </div>
                     <table className="table table-bordered">
                         <thead>
                             <tr>
-                                <th onClick={()=>sorting("id")}>Id</th>
-                                <th onClick={()=>sorting("employee_name")}>Name</th>
-                                <th onClick={()=>sorting("employee_salary")}>salary</th>
-                                <th onClick={()=>sorting("permission_level")}>permission level</th>
+                                <th onClick={() => sorting("id")}>Id</th>
+                                <th onClick={() => sorting("employee_name")}>Name</th>
+                                <th onClick={() => sorting("employee_salary")}>salary</th>
+                                <th onClick={() => sorting("permission_level")}>permission level</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
 
                         <tbody>
                             {
-                                currentUsers.map((user,i) => {
+                                filteredcategory.map((user, i) => {
                                     return (
 
                                         <tr key={i}>
